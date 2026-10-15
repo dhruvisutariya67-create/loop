@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>JS Operators & Conditionals</title>
+  <style>
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      background: #f1f5f9;
+      color: #27313d;
+      font: 16px/1.6 Arial, sans-serif
+    }
+
+    main {
+      max-width: 1240px;
+      margin: auto;
+      padding: 42px 24px 55px
+    }
+
+    h1 {
+      color: #2453ce;
+      font-size: 32px;
+      line-height: 1.3;
+      margin: 4px 0 24px
+    }
+
+    header p {
+      margin: 0 0 14px
+    }
+
+    button {
+      border: 0;
+      border-radius: 6px;
+      background: #2860ee;
+      color: white;
+      font-weight: 600;
+      padding: 10px 18px;
+      cursor: pointer
+    }
+
+    button:hover {
+      filter: brightness(.9)
+    }
+
+    button:focus-visible,
+    textarea:focus-visible {
+      outline: 3px solid #86aafc;
+      outline-offset: 3px
+    }
+
+    #all {
+      margin-top: 15px
+    }
+
+    h2 {
+      font-size: 24px;
+      margin: 34px 0 20px;
+      line-height: 1.4
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px
+    }
+
+    article {
+      padding: 22px;
+      border: 1px solid #dde4eb;
+      border-radius: 14px;
+      background: white
+    }
+
+    h3 {
+      font-size: 18px;
+      margin: 0 0 16px
+    }
+
+    article p {
+      margin: 0 0 16px;
+      min-height: 51px
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 7px
+    }
+
+    textarea {
+      width: 100%;
+      height: 190px;
+      resize: vertical;
+      background: #101728;
+      color: #d5dce6;
+      border: 1px solid #303848;
+      border-radius: 10px;
+      padding: 16px;
+      font: 14px/1.6 Consolas, monospace
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      margin: 13px 0
+    }
+
+    .reset {
+      background: #4b5563
+    }
+
+    pre {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      background: #ecfdf5;
+      color: #285243;
+      border: 1px solid #c9f1dc;
+      border-radius: 9px;
+      padding: 16px;
+      margin: 0 0 12px;
+      min-height: 78px;
+      font: 14px/1.6 Consolas, monospace
+    }
+
+    pre.error {
+      background: #fff1f2;
+      border-color: #fecdd3;
+      color: #a52d42
+    }
+
+    footer {
+      margin-top: 35px;
+      padding-top: 20px;
+      border-top: 1px solid #dce3eb;
+      color: #667283;
+      font-size: 13px
+    }
+
+    @media(max-width:950px) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+      }
+    }
+
+    @media(max-width:620px) {
+      main {
+        padding: 25px 18px
+      }
+
+      .grid {
+        grid-template-columns: 1fr
+      }
+
+      h1 {
+        font-size: 27px
+      }
+
+      article p {
+        min-height: 0
+      }
+
+      h2 {
+        font-size: 22px
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <header>
+      <h1>JS Operators & Conditionals</h1>
+      <p>Edit any code example, then click Run to see its output.</p>
+      <p>Use console.log() to display results. Each example runs independently. Edits remain until you reset or reload
+        the page.</p><button id="all">Run All Examples</button>
+    </header>
+    <section aria-labelledby="calculator-title">
+      <h2 id="calculator-title">Student Grade Calculator</h2>
+      <article>
+        <p>Enter marks from 0 to 100. Your letter grade updates as you type, using both if-else and switch.</p>
+        <form id="grade-form" novalidate><label for="student-marks">Student marks (0–100)</label><input
+            id="student-marks" name="marks" type="number" min="0" max="100" step="any" placeholder="e.g. 85" required
+            aria-describedby="grade-scale"
+            style="width:100%;max-width:320px;padding:12px;border:1px solid #94a3b8;border-radius:6px;font:inherit">
+          <div class="actions"><button type="submit">Calculate Grade</button><button type="reset"
+              class="reset">Clear</button></div>
+        </form>
+        <p id="grade-scale">A: 90–100 · B: 80–below 90 · C: 70–below 80 · D: 60–below 70 · F: below 60</p>
+        <pre id="grade-result" role="status" aria-live="polite">Enter marks to see your grade.</pre>
+      </article>
+    </section>
+    <section>
+      <h2>1. Arithmetic & Assignment Operators</h2>
+      <div class="grid">
+        <article>
+          <h3>Arithmetic Operators</h3>
+          <p>Perform calculations with numbers.</p><label for="code-1">Editable code</label><textarea id="code-1"
+            spellcheck="false">let a = 20;
+let b = 6;
+console.log(&quot;Addition:&quot;, a + b);
+console.log(&quot;Subtraction:&quot;, a - b);
+console.log(&quot;Multiplication:&quot;, a * b);
+console.log(&quot;Division:&quot;, a / b);
+console.log(&quot;Remainder:&quot;, a % b);
+console.log(&quot;Exponent:&quot;, 2 ** 3);</textarea>
+          <div class="actions"><button class="run">Run</button><button class="reset">Reset</button></div>
+          <pre aria-live="polite">Output: Click Run to execute the code.</pre>
+        </article>
+        <article>
+          <h3>Assignment Operators</h3>
+          <p>Assign and update variable values.</p><label for="code-2">Editable code</label><textarea id="code-2"
+            spellcheck="false">let marks = 50;
+marks += 10;
+console.log(&quot;After +=:&quot;, marks);
+marks -= 5;
+console.log(&quot;After -=:&quot;, marks);
+marks *= 2;
+console.log(&quot;After *=:&quot;, marks);
+marks /= 2;
+console.log(&quot;After /=:&quot;, marks);</textarea>
+          <div class="actions"><button class="run">Run</button><button class="reset">Reset</button></div>
+          <pre aria-live="polite">Output: Click Run to execute the code.</pre>
+        </article>
+        <article>
+          <h3>Increment & Decrement</h3>
+          <p>Increase or decrease a value by one.</p><label for="code-3">Editable code</label><textarea id="code-3"
+            spellcheck="false">let score = 10;
+score++;
+console.log(&quot;Increment:&quot;, score);
+score--;
+console.log(&quot;Decrement:&quot;, score);</textarea>
+          <div class="actions"><button class="run">Run</button><button class="reset">Reset</button></div>
+          <pre aria-live="polite">Output: Click Run to execute the code.</pre>
+        </article>
+      </div>
+    </section>
+    <section>
+      <h2>2. Equality & Logical Operators</h2>
+      <div class="grid">
+        <article>
+          <h3>Loose vs Strict Equality</h3>
+          <p>== can convert types. === compares value and type.</p><label for="code-4">Editable code</label><textarea
+            id="code-4" spellcheck="false">console.log(&quot;Loose equality:&quot;, &quot;5&quot; == 5);
+console.log(&quot;Strict equality:&quot;, &quot;5&quot; === 5);
+console.log(&quot;Strict inequality:&quot;, &quot;5&quot; !== 5);
+console.log(&quot;Same type and value:&quot;, 5 === 5);</textarea>
+          <div class="actions"><button class="run">Run</button><button class="reset">Reset</button></div>
+          <pre aria-live="polite">Output: Click Run to execute the code.</pre>
+        </article>
+        <article>
+          <h3>Logical AND & OR</h3>
+          <p>&& requires both conditions. || requires at least one.</p><label for="code-5">Editable
+            code</label><textarea id="code-5" spellcheck="false">let marks = 85;
+let attendance = 80;
+console.log(&quot;Eligible:&quot;, marks &gt;= 60 &amp;&amp; attendance &gt;= 75);
+console.log(&quot;Scholarship:&quot;, marks &gt;= 90 || attendance &gt;= 95);</textarea>
+          <div class="actions"><button class="run">Run</button><button class="reset">Reset</button></div>
+          <pre aria-live="polite">Output: Click Run to execute the code.</pre>
+        </article>
+        <article>
+          <h3>Logical NOT</h3>
+          <p>! reverses a boolean value.</p><label for="code-6">Editable code</label><textarea id="code-6"
+            spellcheck="false">let isAbsent = false;
+console.log(&quot;Is present:&quot;, !isAbsent);
+console.log(&quot;Not true:&quot;, !true);
+console.log(&quot;Not false:&quot;, !false);</textarea>
+          <div class="actions"><button class="run">Run</button><button class="reset">Reset</button></div>
+          <pre aria-live="polite">Output: Click Run to execute the code.</pre>
+        </article>
+      </div>
+    </section>
+    <section>
+      <h2>3. Conditional Statements</h2>
+      <div class="grid">
+        <article>
+          <h3>if-else</h3>
+          <p>Choose an outcome based on a condition.</p><label for="code-7">Editable code</label><textarea id="code-7"
+            spellcheck="false">let marks = 75;
+if (marks &gt;= 60) {
+  console.log(&quot;Result: Pass&quot;);
+} else {
+  console.log(&quot;Result: Fail&quot;);
+}</textarea>
+          <div class="actions"><button class="run">Run</button><button class="reset">Reset</button></div>
+          <pre aria-live="polite">Output: Click Run to execute the code.</pre>
+        </article>
+        <article>
+          <h3>switch</h3>
+          <p>Match a value against multiple cases.</p><label for="code-8">Editable code</label><textarea id="code-8"
+            spellcheck="false">let grade = &quot;B&quot;;
+switch (grade) {
+  case &quot;A&quot;: console.log(&quot;Excellent&quot;); break;
+  case &quot;B&quot;: console.log(&quot;Very good&quot;); break;
+  case &quot;C&quot;: console.log(&quot;Good&quot;); break;
+  case &quot;D&quot;: console.log(&quot;Pass&quot;); break;
+  default: console.log(&quot;Keep practicing&quot;);
+}</textarea>
+          <div class="actions"><button class="run">Run</button><button class="reset">Reset</button></div>
+          <pre aria-live="polite">Output: Click Run to execute the code.</pre>
+        </article>
+        <article>
+          <h3>Ternary Operator</h3>
+          <p>Write a short conditional expression.</p><label for="code-9">Editable code</label><textarea id="code-9"
+            spellcheck="false">let marks = 72;
+let result = marks &gt;= 60 ? &quot;Pass&quot; : &quot;Fail&quot;;
+console.log(&quot;Result:&quot;, result);</textarea>
+          <div class="actions"><button class="run">Run</button><button class="reset">Reset</button></div>
+          <pre aria-live="polite">Output: Click Run to execute the code.</pre>
+        </article>
+      </div>
+    </section>
+    <section>
+      <h2>4. Student Grading Script</h2>
+      <div class="grid">
+        <article>
+          <h3>Grading with if-else</h3>
+          <p>Edit marks (0–100) to calculate a letter grade.</p><label for="code-10">Editable code</label><textarea
+            id="code-10" spellcheck="false">let marks = 92;
+let grade;
+if (!Number.isFinite(marks) || marks &lt; 0 || marks &gt; 100) {
+  console.log(&quot;Invalid marks: enter 0–100.&quot;);
+} else {
+  if (marks &gt;= 90) grade = &quot;A&quot;;
+  else if (marks &gt;= 80) grade = &quot;B&quot;;
+  else if (marks &gt;= 70) grade = &quot;C&quot;;
+  else if (marks &gt;= 60) grade = &quot;D&quot;;
+  else grade = &quot;F&quot;;
+  console.log(&quot;Marks:&quot;, marks);
+  console.log(&quot;Grade:&quot;, grade);
+}</textarea>
+          <div class="actions"><button class="run">Run</button><button class="reset">Reset</button></div>
+          <pre aria-live="polite">Output: Click Run to execute the code.</pre>
+        </article>
+        <article>
+          <h3>Grading with switch</h3>
+          <p>switch(true) evaluates each grade boundary.</p><label for="code-11">Editable code</label><textarea
+            id="code-11" spellcheck="false">let marks = 85;
+let grade;
+if (!Number.isFinite(marks) || marks &lt; 0 || marks &gt; 100) {
+  console.log(&quot;Invalid marks: enter 0–100.&quot;);
+} else {
+  switch (true) {
+    case marks &gt;= 90: grade = &quot;A&quot;; break;
+    case marks &gt;= 80: grade = &quot;B&quot;; break;
+    case marks &gt;= 70: grade = &quot;C&quot;; break;
+    case marks &gt;= 60: grade = &quot;D&quot;; break;
+    default: grade = &quot;F&quot;;
+  }
+  console.log(&quot;Marks:&quot;, marks);
+  console.log(&quot;Grade:&quot;, grade);
+}</textarea>
+          <div class="actions"><button class="run">Run</button><button class="reset">Reset</button></div>
+          <pre aria-live="polite">Output: Click Run to execute the code.</pre>
+        </article>
+        <article>
+          <h3>Grade Feedback</h3>
+          <p>Combine a letter grade with switch-based feedback.</p><label for="code-12">Editable code</label><textarea
+            id="code-12" spellcheck="false">let marks = 78;
+let grade = marks &gt;= 90 ? &quot;A&quot; : marks &gt;= 80 ? &quot;B&quot;
+  : marks &gt;= 70 ? &quot;C&quot; : marks &gt;= 60 ? &quot;D&quot; : &quot;F&quot;;
+console.log(&quot;Marks:&quot;, marks, &quot;| Grade:&quot;, grade);
+switch (grade) {
+  case &quot;A&quot;: console.log(&quot;Excellent work!&quot;); break;
+  case &quot;B&quot;: console.log(&quot;Very good work!&quot;); break;
+  case &quot;C&quot;: console.log(&quot;Good effort!&quot;); break;
+  case &quot;D&quot;: console.log(&quot;You passed. Keep practicing!&quot;); break;
+  default: console.log(&quot;Keep learning. You can improve!&quot;);
+}</textarea>
+          <div class="actions"><button class="run">Run</button><button class="reset">Reset</button></div>
+          <pre aria-live="polite">Output: Click Run to execute the code.</pre>
+        </article>
+      </div>
+    </section>
+    <p>Grading scale: A = 90–100, B = 80–below 90, C = 70–below 80, D = 60–below 70, F = below 60.</p>
+    <footer>Week 1: Web Basics & JS Fundamentals · HTML, CSS & JavaScript</footer>
+  </main>
+  <script>
+    const cards = [...document.querySelectorAll('.grid article')], initial = cards.map(c => c.querySelector('textarea').value), active = new Map();
+    const workerSource = `self.onmessage=function(e){const lines=[];const fmt=v=>typeof v==='string'?v:typeof v==='undefined'?'undefined':typeof v==='bigint'?String(v)+'n':typeof v==='symbol'?String(v):JSON.stringify(v);const console={log:(...a)=>lines.push(a.map(fmt).join(' '))};try{new Function('console',e.data)(console);self.postMessage({text:lines.length?lines.join('\\n'):'Code executed. No console output.',error:false})}catch(err){self.postMessage({text:err.name+': '+err.message,error:true})}};`;
+    const url = URL.createObjectURL(new Blob([workerSource], { type: 'text/javascript' }));
+    function stop(c) { const a = active.get(c); if (a) { a.worker.terminate(); clearTimeout(a.timer); active.delete(c) } }
+    function run(c) { stop(c); const out = c.querySelector('pre'); out.textContent = 'Output: Running…'; out.classList.remove('error'); const worker = new Worker(url); const finish = (text, error) => { stop(c); out.textContent = 'Output: ' + text; out.classList.toggle('error', error) }; const timer = setTimeout(() => finish('Execution timed out. Check for an infinite loop.', true), 2000); active.set(c, { worker, timer }); worker.onmessage = e => finish(e.data.text, e.data.error); worker.onerror = e => { e.preventDefault(); finish(e.message || 'Unable to execute code.', true) }; worker.postMessage(c.querySelector('textarea').value) }
+    cards.forEach((c, i) => { c.querySelector('.run').onclick = () => run(c); c.querySelector('.reset').onclick = () => { stop(c); c.querySelector('textarea').value = initial[i]; c.querySelector('pre').textContent = 'Output: Click Run to execute the code.'; c.querySelector('pre').classList.remove('error') } }); document.querySelector('#all').onclick = () => cards.forEach(run);
+
+    function gradeWithIfElse(marks) {
+      if (marks >= 90) return 'A';
+      else if (marks >= 80) return 'B';
+      else if (marks >= 70) return 'C';
+      else if (marks >= 60) return 'D';
+      else return 'F';
+    }
+    function gradeWithSwitch(marks) {
+      switch (true) {
+        case marks >= 90: return 'A';
+        case marks >= 80: return 'B';
+        case marks >= 70: return 'C';
+        case marks >= 60: return 'D';
+        default: return 'F';
+      }
+    }
+    function parseMarks(raw) {
+      const marks = Number(raw);
+      return raw.trim() !== '' && Number.isFinite(marks) && marks >= 0 && marks <= 100 ? marks : null;
+    }
+    const gradeForm = document.getElementById('grade-form');
+    const marksInput = document.getElementById('student-marks');
+    const gradeResult = document.getElementById('grade-result');
+    function updateGrade() {
+      const marks = parseMarks(marksInput.value);
+      const invalid = marks === null;
+      marksInput.setAttribute('aria-invalid', String(invalid));
+      gradeResult.classList.toggle('error', invalid);
+      if (invalid) {
+        gradeResult.textContent = 'Please enter valid marks between 0 and 100.';
+        return;
+      }
+      gradeResult.textContent = 'Marks: ' + marks + '\nGrade using if-else: ' + gradeWithIfElse(marks) + '\nGrade using switch: ' + gradeWithSwitch(marks);
+    }
+    marksInput.addEventListener('input', updateGrade);
+    gradeForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      updateGrade();
+    });
+    gradeForm.addEventListener('reset', function () {
+      marksInput.removeAttribute('aria-invalid');
+      gradeResult.classList.remove('error');
+      gradeResult.textContent = 'Enter marks to see your grade.';
+    });
+  </script>
+</body>
+
+</html>
